@@ -1,0 +1,320 @@
+/* === VARIABLES POR DEFECTO (MODO OSCURO) === */
+:root {
+  --bg-main: #020617;
+  --bg-panel: rgba(15, 23, 42, 0.7);
+  --border-panel: #1e293b;
+  --text-main: #cbd5e1;
+  --text-muted: #64748b;
+  --card-bg: rgba(2, 6, 23, 0.6);
+  --card-hover: rgba(30, 41, 59, 0.95);
+  --shadow-color: rgba(0, 0, 0, 0.8);
+  --shadow-hover: rgba(0, 0, 0, 0.9);
+  
+  --cyan: #22d3ee;
+  --purple: #c084fc;
+  --blue: #60a5fa;
+  --rose: #f43f5e;
+  --emerald: #34d399;
+  --amber: #fbbf24;
+}
+
+/* === VARIABLES PARA MODO CLARO === */
+[data-theme="light"] {
+  --bg-main: #f1f5f9;
+  --bg-panel: rgba(255, 255, 255, 0.85);
+  --border-panel: #cbd5e1;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --card-bg: rgba(241, 245, 249, 0.7);
+  --card-hover: rgba(255, 255, 255, 1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.2);
+  
+  --cyan: #0891b2;
+  --purple: #9333ea;
+  --blue: #2563eb;
+  --rose: #e11d48;
+  --emerald: #059669;
+  --amber: #d97706;
+}
+
+/* === RESET Y CONTENEDOR PRINCIPAL === */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+/* === CONTROLES SUPERIORES (PDF, FULLSCREEN, TEMA) === */
+.top-controls {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  display: flex;
+  gap: 15px;
+  z-index: 100;
+}
+
+.icon-btn {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  color: var(--text-main);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+.icon-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+/* === LA DIAPOSITIVA === */
+.slide-box {
+  width: 95%;
+  max-width: 1200px;
+  min-height: 80vh;
+  background-color: var(--bg-panel);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-panel);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px var(--shadow-color);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.progress-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+  background-color: var(--border-panel);
+  z-index: 20;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--cyan), var(--purple));
+  transition: width 0.4s ease-out;
+}
+
+/* === ANIMACIÓN === */
+.fade-in { animation: fadeIn 0.4s ease-out forwards; }
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* === CONTENIDO DE LA DIAPOSITIVA === */
+.slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 60px 100px 60px;
+  position: relative;
+  z-index: 10;
+}
+
+/* === PORTADA === */
+.cover-layout { text-align: center; }
+.cover-icon-box {
+  display: inline-block;
+  background-color: var(--bg-main);
+  border: 2px solid var(--cyan);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.4);
+  margin-bottom: 30px;
+}
+.title-gradient {
+  font-size: 3.8rem;
+  font-weight: 900;
+  background: linear-gradient(to right, var(--cyan), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+.subtitle {
+  font-size: 1.3rem;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  font-family: monospace;
+}
+.author-section {
+  margin-top: 50px; padding-top: 40px;
+  border-top: 1px solid var(--border-panel);
+}
+
+/* === CONTENIDO Y VIÑETAS === */
+.content-header {
+  display: flex; align-items: center; gap: 20px;
+  border-bottom: 1px solid var(--border-panel);
+  padding-bottom: 20px; margin-bottom: 30px;
+}
+.icon-box {
+  background-color: var(--bg-main); padding: 15px;
+  border-radius: 14px; border: 1px solid var(--border-panel);
+  display: flex; justify-content: center; align-items: center;
+}
+.content-title { font-size: 2.2rem; font-weight: bold; }
+
+.bullets-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  list-style: none;
+}
+
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 1.25rem;
+  background-color: var(--card-bg);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid var(--border-panel);
+  border-left: 6px solid;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, background-color 0.3s;
+}
+
+.bullet-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  background-color: var(--card-hover);
+  box-shadow: 0 15px 30px var(--shadow-hover);
+  border-color: var(--cyan);
+}
+
+.bullet-dot {
+  margin-top: 8px; width: 14px; height: 14px;
+  border-radius: 50%; flex-shrink: 0;
+}
+
+/* === BOTONES CONTACTO Y QR === */
+.contact-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+.links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contact-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 25px; 
+  background: var(--bg-main);
+  border: 2px solid;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1.05rem; 
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+.contact-btn.github { border-color: var(--purple); color: var(--purple); }
+.contact-btn.github:hover { background: var(--purple); color: #fff; transform: translateY(-4px); }
+.contact-btn.web { border-color: var(--cyan); color: var(--cyan); }
+.contact-btn.web:hover { background: var(--cyan); color: #fff; transform: translateY(-4px); }
+
+.qr-container {
+  background-color: var(--bg-main);
+  border: 2px dashed var(--cyan);
+  padding: 10px; 
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+  transition: all 0.3s ease;
+}
+.qr-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.4);
+  border-style: solid;
+}
+.qr-text {
+  margin-top: 10px;
+  color: var(--cyan);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-size: 0.8rem; 
+}
+
+/* === CONTROLES INFERIORES === */
+.controls {
+  position: absolute; bottom: 30px; right: 40px;
+  display: flex; gap: 15px; z-index: 20;
+}
+.slide-counter {
+  position: absolute; bottom: 45px; left: 50px;
+  font-family: monospace; color: var(--text-muted);
+  font-size: 1.1rem; letter-spacing: 2px; z-index: 20;
+}
+.keyboard-hint {
+  margin-top: 25px; color: var(--text-muted);
+  font-family: monospace; font-size: 1rem; letter-spacing: 1px;
+}
+
+/* ========================================================= */
+/* === REGLAS MÁGICAS PARA EXPORTAR A PDF (IMPRESIÓN) === */
+/* ========================================================= */
+@media print {
+  /* Forzamos colores y fondos */
+  body { 
+    background: var(--bg-main) !important; 
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact; 
+  }
+  
+  /* Ocultamos los botones y el QR al imprimir */
+  .top-controls, .controls, .keyboard-hint, .progress-bg, .slide-counter { 
+    display: none !important; 
+  }
+  
+  /* Formato tipo documento */
+  .app-container { padding: 0 !important; display: block; }
+  .print-container { width: 100%; display: block; }
+  
+  /* Cada diapositiva ocupará una página entera (A4 horizontal) */
+  .slide-box {
+    width: 100% !important;
+    max-width: none !important;
+    height: 99vh !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    page-break-after: always;
+    margin: 0 !important;
+  }
+  
+  .slide-content { padding: 40px !important; }
+}
